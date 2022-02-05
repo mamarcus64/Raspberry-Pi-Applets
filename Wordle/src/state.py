@@ -8,10 +8,17 @@ class State:
         self.current_row = 0
         self.current_col = 0
         self.board = [[None for col in range(cols)] for row in range(rows)]
-        self.words = open('../words/five_letter_words.txt').readlines()
+        if self.cols == 4:
+            self.words = open('../words/four_letter_words.txt').readlines()
+        elif self.cols == 5:
+            self.words = open('../words/five_letter_words.txt').readlines()
+        else:
+            self.words = open('../words/six_letter_words.txt').readlines()
         self.words = [x.strip() for x in self.words]
         self.word = None
+        self.guess = None
         self.shake = (-1, 0)
+        self.flip = (-1, 0)
         self.guessed_letters = {}
         while not self.word or self.word.endswith('s'):
             self.word = self.words[random.randint(0, 2000)]
@@ -74,6 +81,7 @@ class State:
                     self.guessed_letters[letter] = type
                 elif type == 'half-right' and self.guessed_letters[letter] == 'wrong':
                     self.guessed_letters[letter] = type
-
+        self.guess = guess.lower()
+        self.flip = (self.current_row, -1)
         self.current_row += 1
         self.current_col = 0
