@@ -1,4 +1,3 @@
-from tkinter.tix import TEXT
 import pygame
 
 pygame.init()

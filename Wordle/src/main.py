@@ -2,6 +2,7 @@ import pygame
 import state
 import drawing
 import time
+from pygame import freetype
 
 pygame.init()
 
@@ -71,7 +72,7 @@ while running:
     drawing.draw_button(screen, FONT, button_four, "4-letter restart")
     drawing.draw_button(screen, FONT, button_five, "5-letter restart")
     drawing.draw_button(screen, FONT, button_six, "6-letter restart")
-    if game_state.current_row == game_state.rows:
+    if game_state.current_row == game_state.rows or game_state.guess == game_state.word:
         final_area = (GRID_AREA[0] + GRID_AREA[2] // 2 - GRID_AREA[0] // 8, GRID_AREA[1] + GRID_AREA[3], GRID_AREA[0] // 3, GRID_AREA[0] // 4)
         drawing.draw_button(screen, FONT, final_area, "Word: " + game_state.word,  color=BG_COLOR)
 
